@@ -1,0 +1,53 @@
+{
+  "name": "liatrio-exercise-api",
+  "displayName": "Liatrio Exercise API",
+  "version": "0.0.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "license": "MPL-2.0",
+  "homepage": "https://git.4lch4.io/4lch4/4lch4",
+  "scripts": {
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "pretty": "prettier --write .",
+    "lint": "prettier -c .",
+    "test": "echo 'There are currently no tests available.'",
+    "scan": "snyk monitor && snyk code test"
+  },
+  "engines": { "node": ">=16.0.0" },
+  "keywords": [ "4lch4" ],
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.4lch4.io:22022/4lch4/4lch4.git"
+  },
+  "author": {
+    "name": "4lch4",
+    "email": "hey@4lch4.email",
+    "url": "https://4lch4.com"
+  },
+  "bugs": {
+    "email": "bugs@4lch4.email",
+    "url": "https://git.4lch4.io/4lch4/4lch4/issues"
+  },
+  "dependencies": {
+    "@4lch4/koa-oto": "^2.0.0",
+    "@4lch4/koa-router-printer": "^1.4.3",
+    "@4lch4/logger": "^1.11.0",
+    "@koa/router": "^12.0.0",
+    "dayjs": "^1.11.7",
+    "koa": "^2.14.1",
+    "koa-body": "^6.0.1",
+    "koa-helmet": "^7.0.2"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.13.6",
+    "@types/koa__router": "^12.0.0",
+    "@types/node": "^18.15.11",
+    "prettier": "^2.8.7",
+    "snyk": "^1.1130.0",
+    "typescript": "^5.0.2"
+  }
+}

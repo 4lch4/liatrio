@@ -1,0 +1,37 @@
+version: 3
+
+env:
+  APP_PORT: 8080
+  DOCKER_CONTAINER_NAME: liatrio-api
+  DOCKER_IMAGE_NAME: 4lch4/liatrio-api
+
+tasks:
+  build:
+    aliases: [bd]
+    silent: false
+    desc: Builds the project into a Docker Image.
+    cmds:
+      - docker build -t {{ .DOCKER_IMAGE_NAME }}:latest .
+
+  clean:
+    aliases: [c]
+    silent: false
+    desc: Stops & deletes the Docker container running the project.
+    deps: ['stop']
+    cmds:
+      - docker rm {{ .DOCKER_CONTAINER_NAME }}
+
+  start:
+    aliases: [up]
+    silent: false
+    desc: Starts the project by ensuring a Docker Image was built and then running that Image in a container.
+    deps: ['build']
+    cmds:
+      - docker run -d -p {{ .APP_PORT }}:{{ .APP_PORT }} --name {{ .DOCKER_CONTAINER_NAME }} {{ .DOCKER_IMAGE_NAME }}:latest
+
+  stop:
+    aliases: [down]
+    silent: false
+    desc: Stops the Docker Container that's locally running the website.
+    cmds:
+      - docker stop {{ .DOCKER_CONTAINER_NAME }}
