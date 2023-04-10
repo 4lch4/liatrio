@@ -41,3 +41,9 @@ tasks:
     cmds:
       - task api:stop
 
+  fresh:
+    desc: Performs all of the steps necessary to build and start the app in its own EKS cluster.
+    cmds:
+      - task iaac:build
+      - task api:build
+      - task api:start
