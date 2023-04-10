@@ -1,22 +1,43 @@
 version: 3
 
 includes:
-  iaac: 
+  api:
+    taskfile: ./api/Taskfile.yml
+    dir: ./api
+  iaac:
     taskfile: ./iaac/Taskfile.yml
     dir: ./iaac
 
 tasks:
   pretty:
     aliases: [p, format, fmt]
-    silent: false
     desc: Uses the Prettier CLI tool to format the codebase.
-    cmds: ['prettier --write .']
+    cmds:
+      - prettier --write .
 
   eks:build:
     desc: Uses Terraform to build the EKS cluster where the API is to be deployed.
-    cmds: [task iaac:build]
+    cmds:
+      - task iaac:build
 
   eks:destroy:
     desc: Destroys the EKS cluster w/ Terraform.
-    cmds: [task iaac:destroy]
+    cmds:
+      - task iaac:destroy
+
+  api:build:
+    desc: Build the API into a Docker Image.
+    cmds:
+      - task api:build
+
+  api:start:
+    desc: Starts the API as a Docker Container.
+    deps: [api:build]
+    cmds:
+      - task api:start
+
+  api:stop:
+    desc: Stops the API Docker Container.
+    cmds:
+      - task api:stop
 
