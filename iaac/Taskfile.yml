@@ -3,7 +3,7 @@ version: 3
 tasks:
   build:
     aliases: [bd]
-    desc: Builds the project into a Docker Image.
+    desc: Builds the EKS cluster, updates the local kubeconfig, and runs a kubectl command to validate a connection to the cluster.
     cmds:
       # Apply the Terraform files and build the cluster.
       - terraform apply
