@@ -1,0 +1,19 @@
+version: 3
+
+tasks:
+  build:
+    aliases: [bd]
+    desc: Builds the project into a Docker Image.
+    cmds:
+      # Apply the Terraform files and build the cluster.
+      - terraform apply
+      # Get the necessary data for a kube-config.
+      - aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
+      # Verify the cluster was built and connected to as expected.
+      - kubectl cluster-info
+
+  destroy:
+    aliases: [down]
+    desc: Uses Terraform to destroy any resources that were built using the local Terraform files.
+    cmds:
+      - terraform destroy
