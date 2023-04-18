@@ -56,5 +56,5 @@ tasks:
       # Builds the EKS cluster and Docker image in parallel.
       - task --parallel iaac:build api:build
       # Starts the API docker image.
-      - task api:start
+      - task start:api
       - task test:all
