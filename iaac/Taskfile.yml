@@ -5,8 +5,9 @@ tasks:
     aliases: [bd]
     desc: Builds the EKS cluster, updates the local kubeconfig, and runs a kubectl command to validate a connection to the cluster.
     cmds:
-      # Apply the Terraform files and build the cluster.
-      - terraform apply
+      # Apply the Terraform files and build the cluster. Auto-approve prevents having to type "yes"
+      # to start the build process.
+      - terraform apply -auto-approve
       # Get the necessary data for a kube-config.
       - aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
       # Verify the cluster was built and connected to as expected.
