@@ -12,36 +12,30 @@ tasks:
   pretty:
     aliases: [p, format, fmt]
     desc: Uses the Prettier CLI tool to format the codebase.
-    cmds:
-      - prettier --write .
+    cmds: ['prettier --write .']
 
-  eks:build:
+  build:eks:
     desc: Uses Terraform to build the EKS cluster where the API is to be deployed.
-    cmds:
-      - task iaac:build
+    cmds: ['task iaac:build']
 
-  eks:destroy:
-    desc: Destroys the EKS cluster w/ Terraform.
-    cmds:
-      - task iaac:destroy
-
-  api:build:
+  build:api:
     desc: Build the API into a Docker Image.
-    cmds:
-      - task api:build
+    cmds: ['task api:build']
 
-  api:start:
+  start:api:
     desc: Starts the API as a Docker Container.
     deps: [api:build]
-    cmds:
-      - task api:start
+    cmds: ['task api:start']
 
-  api:stop:
+  stop:api:
     desc: Stops the API Docker Container.
-    cmds:
-      - task api:stop
+    cmds: ['task api:stop']
 
-  fresh:
+  destroy:eks:
+    desc: Destroys the EKS cluster w/ Terraform.
+    cmds: ['task iaac:destroy']
+
+  start:fresh:
     desc: Performs all of the steps necessary to build and start the app in its own EKS cluster.
     cmds:
       - task iaac:build
