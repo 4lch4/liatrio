@@ -2,9 +2,19 @@
 
 This directory is where I'll be storing files related to the hiring exercise provided to me by Liatrio.
 
-## Usage
+## Prerequisites
 
-In order to manage/operate the project you must first have the [Taskfile CLI][0] installed. At which point, you can run the following commands.
+The following is a list of the things that must be installed/configured on your machine before you're able to actually use the contents of this repository:
+
+- Docker
+- Terraform v1.3+
+- The AWS CLI (`v2.7.0`/`v1.24.0`) or newer, [installed][2] and [configured][3].
+- A method of authenticating the AWS CLI with your account.
+  - In my case, I used the [AWS IAM Authenticator][4] and set the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` environment variables.
+- [kubectl][5] `v1.24.0` or newer.
+- [Taskfile CLI][6]
+
+## Usage
 
 ### Fresh Start
 
@@ -34,3 +44,9 @@ If you wish to start everything up from scratch with individual commands then yo
 
 
 [0]: https://taskfile.dev/installation
+[1]: https://www.docker.com/products/docker-desktop
+[2]: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+[3]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html
+[4]: https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+[5]: https://kubernetes.io/docs/tasks/tools/
+[6]: https://taskfile.dev
