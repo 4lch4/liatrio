@@ -24,20 +24,37 @@ tasks:
 
   start:api:
     desc: Starts the API as a Docker Container.
-    deps: [api:build]
     cmds: ['task api:start']
 
   stop:api:
     desc: Stops the API Docker Container.
     cmds: ['task api:stop']
 
+  logs:api:
+    cmds: ['docker logs liatrio-api']
+
+  test:api:
+    cmds: ['bash ./tests/api.sh']
+
+  test:cluster:
+    cmds: ['bash ./tests/cluster.sh']
+
+  test:all:
+    cmds:
+      - task test:api
+      - task test:cluster
+
   destroy:eks:
     desc: Destroys the EKS cluster w/ Terraform.
     cmds: ['task iaac:destroy']
 
-  start:fresh:
+  fresh:
+    aliases: ['fresh']
     desc: Performs all of the steps necessary to build and start the app in its own EKS cluster.
+    silent: true
     cmds:
-      - task iaac:build
-      - task api:build
+      # Builds the EKS cluster and Docker image in parallel.
+      - task --parallel iaac:build api:build
+      # Starts the API docker image.
       - task api:start
+      - task test:all
